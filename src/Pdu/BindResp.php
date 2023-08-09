@@ -39,4 +39,13 @@ abstract class BindResp extends Pdu
         $this->systemId = $systemId;
         return $this;
     }
+
+    public function __toString(): string
+    {
+        $wrapper = new DataWrapper('');
+        $wrapper->writeNullTerminatedString($this->getSystemId());
+        $this->setBody($wrapper->__toString());
+
+        return parent::__toString();
+    }
 }

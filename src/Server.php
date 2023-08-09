@@ -5,10 +5,13 @@ namespace alexeevdv\React\Smpp;
 use alexeevdv\React\Smpp\Pdu\EnquireLink;
 use alexeevdv\React\Smpp\Pdu\EnquireLinkResp;
 use alexeevdv\React\Smpp\Pdu\Factory;
+use alexeevdv\React\Smpp\Pdu\Unbind;
+use alexeevdv\React\Smpp\Pdu\UnbindResp;
 use alexeevdv\React\Smpp\Proto\CommandStatus;
 use Psr\Log\LoggerInterface;
+use React\EventLoop\Loop;
 use React\Socket\ConnectionInterface;
-use React\Socket\Server as SocketServer;
+use React\Socket\SocketServer;
 use React\Socket\ServerInterface;
 
 class Server implements ServerInterface
@@ -39,10 +42,24 @@ class Server implements ServerInterface
 
             $connection->on(EnquireLink::class, function (EnquireLink $pdu) use ($connection) {
                 $this->logger->info('enquire_link');
+                
                 $response = new EnquireLinkResp();
-                $response->setCommandStatus(CommandStatus::ESME_RSYSERR);
+                $response->setCommandStatus(CommandStatus::ESME_ROK);
                 $response->setSequenceNumber($pdu->getSequenceNumber());
                 $connection->replyWith($response);
+            });
+
+            $connection->on(Unbind::class, function(Unbind $pdu) use ($connection) {
+                $this->logger->info('unbind');
+
+                $response = new UnbindResp();
+                $response->setCommandStatus(CommandStatus::ESME_ROK);
+                $response->setSequenceNumber($pdu->getSequenceNumber());
+                $connection->replyWith($response);
+
+                Loop::addTimer(0.5, function() use ($connection) {
+                    $connection->close();
+                });
             });
 
             $this->socketServer->emit(Connection::class, [$connection]);
