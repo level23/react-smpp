@@ -1,5 +1,5 @@
 {
-    "name": "alexeevdv/react-smpp",
+    "name": "level23/react-smpp",
     "description": "Async SMPP server and client implementations for ReactPHP.",
     "license": "MIT",
     "keywords": ["react", "reactphp", "smpp"],
