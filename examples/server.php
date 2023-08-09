@@ -16,15 +16,12 @@ use React\Socket\SocketServer;
 
 require_once dirname(__DIR__) . '/vendor/autoload.php';
 
-// Fetch from redis the supplier details
-$suppliers = [];
-
 $logger = new Stdout();
 
 $socketServer = new SocketServer('tcp://0.0.0.0:2775');
 $smppServer   = new Server($socketServer, $logger);
 
-$smppServer->on(Connection::class, static function (Connection $connection) use ($redis, $logger) {
+$smppServer->on(Connection::class, static function (Connection $connection) use ($logger) {
     $connection->on(BindTransceiver::class, static function (BindTransceiver $pdu) use ($connection, $logger) {
         $logger->info('bind_transceiver 1. system_id: {systemId}, password: {password}', [
             'systemId' => $pdu->getSystemId(),
@@ -37,7 +34,7 @@ $smppServer->on(Connection::class, static function (Connection $connection) use 
         $connection->replyWith($response);
     });
 
-    $connection->on(SubmitSm::class, static function (SubmitSm $pdu) use ($redis, $connection, $logger) {
+    $connection->on(SubmitSm::class, static function (SubmitSm $pdu) use ($connection, $logger) {
         $logger->info('sumbit_sm. source: {source}, destination: {destination}, short_message: {shortMessage}', [
             'source'       => $pdu->getSourceAddress() !== null ? $pdu->getSourceAddress()->getValue() : null,
             'destination'  => $pdu->getDestinationAddress()->getValue(),
@@ -56,6 +53,7 @@ $smppServer->on(Connection::class, static function (Connection $connection) use 
         if ($pdu->getRegisteredDelivery()) {
             $logger->info('Queuing delivery response.');
 
+            // Simulate delivery
             Loop::addTimer(2, function () use ($submitDate, $connection, $pdu, $messageId) {
                 $response = new DeliverSm();
                 $response->setIsDeliveryReceipt(true);
