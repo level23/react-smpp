@@ -1,9 +1,9 @@
 <?php
 
-namespace alexeevdv\React\Smpp\Proto;
+namespace level23\React\Smpp\Proto;
 
-use alexeevdv\React\Smpp\Proto\Address\Npi;
-use alexeevdv\React\Smpp\Proto\Address\Ton;
+use level23\React\Smpp\Proto\Address\Npi;
+use level23\React\Smpp\Proto\Address\Ton;
 
 class Address
 {

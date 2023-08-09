@@ -1,9 +1,9 @@
 <?php
 
-namespace alexeevdv\React\Smpp;
+namespace level23\React\Smpp;
 
-use alexeevdv\React\Smpp\Pdu\EnquireLink;
-use alexeevdv\React\Smpp\Pdu\Factory;
+use level23\React\Smpp\Pdu\EnquireLink;
+use level23\React\Smpp\Pdu\Factory;
 use Psr\Log\NullLogger;
 use React\EventLoop\LoopInterface;
 use React\Promise\Deferred;

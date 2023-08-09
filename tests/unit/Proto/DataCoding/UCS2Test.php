@@ -2,7 +2,7 @@
 
 namespace tests\unit\Proto\DataCoding;
 
-use alexeevdv\React\Smpp\Proto\DataCoding\UCS2;
+use level23\React\Smpp\Proto\DataCoding\UCS2;
 use Codeception\Test\Unit;
 
 class UCS2Test extends Unit

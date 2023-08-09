@@ -2,7 +2,7 @@
 
 namespace tests\unit\Proto\DataCoding;
 
-use alexeevdv\React\Smpp\Proto\DataCoding\ISO8859Cyrillic;
+use level23\React\Smpp\Proto\DataCoding\ISO8859Cyrillic;
 use Codeception\Test\Unit;
 
 class ISO8859CyrillicTest extends Unit

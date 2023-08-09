@@ -2,7 +2,7 @@
 
 namespace tests\unit\Proto;
 
-use alexeevdv\React\Smpp\Proto\DateTime;
+use level23\React\Smpp\Proto\DateTime;
 use Codeception\Test\Unit;
 
 class DateTimeTest extends Unit

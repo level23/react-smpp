@@ -2,6 +2,8 @@
 
 Async SMPP server and client implementations for ReactPHP.
 
+Forked from https://github.com/alexeevdv/react-smpp
+
 ## Installation
 
 The preferred way to install this extension is through [composer](https://getcomposer.org/download/).
@@ -9,13 +11,13 @@ The preferred way to install this extension is through [composer](https://getcom
 Either run
 
 ```bash
-$ php composer.phar require alexeevdv/react-smpp 1.0.x-dev
+$ php composer.phar require level23/react-smpp dev-develop
 ```
 
 or add
 
 ```json
-"alexeevdv/react-smpp": "1.0.x-dev"
+"level23/react-smpp": "dev-develop"
 ```
 
 to the `require` section of your `composer.json` file.

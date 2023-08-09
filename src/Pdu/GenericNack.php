@@ -1,6 +1,6 @@
 <?php
 
-namespace alexeevdv\React\Smpp\Pdu;
+namespace level23\React\Smpp\Pdu;
 
 class GenericNack extends Pdu
 {

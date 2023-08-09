@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace alexeevdv\React\Smpp\Proto\Address;
+namespace level23\React\Smpp\Proto\Address;
 
 /**
  * Type of number

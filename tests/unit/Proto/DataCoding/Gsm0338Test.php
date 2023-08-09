@@ -2,7 +2,7 @@
 
 namespace tests\unit\Proto\DataCoding;
 
-use alexeevdv\React\Smpp\Proto\DataCoding\Gsm0338;
+use level23\React\Smpp\Proto\DataCoding\Gsm0338;
 use Codeception\Test\Unit;
 
 class Gsm0338Test extends Unit

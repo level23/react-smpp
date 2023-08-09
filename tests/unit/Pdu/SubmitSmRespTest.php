@@ -2,7 +2,7 @@
 
 namespace tests\unit\Pdu;
 
-use alexeevdv\React\Smpp\Pdu\SubmitSmResp;
+use level23\React\Smpp\Pdu\SubmitSmResp;
 use Codeception\Test\Unit;
 
 class SubmitSmRespTest extends Unit

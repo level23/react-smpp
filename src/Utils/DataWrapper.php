@@ -1,9 +1,9 @@
 <?php
 
-namespace alexeevdv\React\Smpp\Utils;
+namespace level23\React\Smpp\Utils;
 
-use alexeevdv\React\Smpp\Pdu\TLV;
-use alexeevdv\React\Smpp\Proto\Address;
+use level23\React\Smpp\Pdu\TLV;
+use level23\React\Smpp\Proto\Address;
 
 class DataWrapper
 {

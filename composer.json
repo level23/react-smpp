@@ -5,7 +5,7 @@
     "keywords": ["react", "reactphp", "smpp"],
     "autoload": {
         "psr-4": {
-            "alexeevdv\\React\\Smpp\\" : "src"
+            "level23\\React\\Smpp\\" : "src"
         }
     },
     "config": {

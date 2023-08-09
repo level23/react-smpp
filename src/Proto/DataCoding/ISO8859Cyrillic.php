@@ -1,8 +1,8 @@
 <?php
 
-namespace alexeevdv\React\Smpp\Proto\DataCoding;
+namespace level23\React\Smpp\Proto\DataCoding;
 
-use alexeevdv\React\Smpp\Proto\Contract\DataCoding;
+use level23\React\Smpp\Proto\Contract\DataCoding;
 
 class ISO8859Cyrillic implements DataCoding
 {

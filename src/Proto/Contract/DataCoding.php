@@ -1,6 +1,6 @@
 <?php
 
-namespace alexeevdv\React\Smpp\Proto\Contract;
+namespace level23\React\Smpp\Proto\Contract;
 
 interface DataCoding
 {

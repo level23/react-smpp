@@ -2,8 +2,8 @@
 
 namespace tests\unit\Pdu;
 
-use alexeevdv\React\Smpp\Pdu\SubmitSm;
-use alexeevdv\React\Smpp\Proto\Address;
+use level23\React\Smpp\Pdu\SubmitSm;
+use level23\React\Smpp\Proto\Address;
 use Codeception\Test\Unit;
 use DateTime;
 

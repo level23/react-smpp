@@ -1,9 +1,9 @@
 <?php
 
-namespace alexeevdv\React\Smpp;
+namespace level23\React\Smpp;
 
-use alexeevdv\React\Smpp\Pdu\Pdu;
-use alexeevdv\React\Smpp\Pdu\Factory;
+use level23\React\Smpp\Pdu\Pdu;
+use level23\React\Smpp\Pdu\Factory;
 use Psr\Log\LoggerInterface;
 use React\Promise\Deferred;
 use React\Promise\Promise;

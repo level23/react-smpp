@@ -1,6 +1,6 @@
 <?php
 
-namespace alexeevdv\React\Smpp\Proto;
+namespace level23\React\Smpp\Proto;
 
 use DateTimeZone;
 

@@ -1,11 +1,11 @@
 <?php
 
-namespace alexeevdv\React\Smpp\Pdu;
+namespace level23\React\Smpp\Pdu;
 
-use alexeevdv\React\Smpp\Proto\Address;
-use alexeevdv\React\Smpp\Proto\Contract\DataCoding;
-use alexeevdv\React\Smpp\Proto\DateTime;
-use alexeevdv\React\Smpp\Utils\DataWrapper;
+use level23\React\Smpp\Proto\Address;
+use level23\React\Smpp\Proto\Contract\DataCoding;
+use level23\React\Smpp\Proto\DateTime;
+use level23\React\Smpp\Utils\DataWrapper;
 use DateTimeInterface;
 
 class SubmitSm extends Pdu

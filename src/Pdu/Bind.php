@@ -1,9 +1,9 @@
 <?php
 
-namespace alexeevdv\React\Smpp\Pdu;
+namespace level23\React\Smpp\Pdu;
 
-use alexeevdv\React\Smpp\Proto\Address;
-use alexeevdv\React\Smpp\Utils\DataWrapper;
+use level23\React\Smpp\Proto\Address;
+use level23\React\Smpp\Utils\DataWrapper;
 
 abstract class Bind extends Pdu
 {

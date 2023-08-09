@@ -1,6 +1,6 @@
 <?php
 
-namespace alexeevdv\React\Smpp\Exception;
+namespace level23\React\Smpp\Exception;
 
 class MalformedPdu extends \Exception
 {
