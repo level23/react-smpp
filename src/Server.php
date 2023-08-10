@@ -2,6 +2,7 @@
 
 namespace level23\React\Smpp;
 
+use level23\React\Smpp\Pdu\SubmitSm;
 use level23\React\Smpp\Pdu\EnquireLink;
 use level23\React\Smpp\Pdu\EnquireLinkResp;
 use level23\React\Smpp\Pdu\Factory;
@@ -32,25 +33,27 @@ class Server implements ServerInterface
         $this->logger = $logger;
 
         $this->socketServer->on('connection', function (ConnectionInterface $conn) {
-            $this->logger->info('SMPP client connected. IP address: {address}', [
-                'address' => $conn->getRemoteAddress(),
-            ]);
+            $this->logger->debug('[smpp][' . $conn->getRemoteAddress() . '] Connected');
 
             $connection = new Connection($conn, new Factory(), $this->logger);
 
             // TODO start timer for enquire_link. if exceeded - close connection
 
             $connection->on(EnquireLink::class, function (EnquireLink $pdu) use ($connection) {
-                $this->logger->info('enquire_link');
-                
+                $this->logger->debug('[smpp][' . $connection->getRemoteAddress() . '] enquire_link');
+
                 $response = new EnquireLinkResp();
                 $response->setCommandStatus(CommandStatus::ESME_ROK);
                 $response->setSequenceNumber($pdu->getSequenceNumber());
                 $connection->replyWith($response);
             });
 
+            $connection->on(SubmitSm::class, function(SubmitSm $pdu) use ($connection) {
+                $this->logger->debug('[smpp][' . $connection->getRemoteAddress() . '] submit_sm');
+            });
+
             $connection->on(Unbind::class, function(Unbind $pdu) use ($connection) {
-                $this->logger->info('unbind');
+                $this->logger->debug('[smpp][' . $connection->getRemoteAddress() . '] unbind');
 
                 $response = new UnbindResp();
                 $response->setCommandStatus(CommandStatus::ESME_ROK);
@@ -58,6 +61,7 @@ class Server implements ServerInterface
                 $connection->replyWith($response);
 
                 Loop::addTimer(0.5, function() use ($connection) {
+                    $this->logger->debug('[smpp][' . $connection->getRemoteAddress() . '] disconnecting');
                     $connection->close();
                 });
             });

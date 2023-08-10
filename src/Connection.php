@@ -42,9 +42,6 @@ class Connection implements ConnectionInterface
         $this->connection->on('data', function ($data) {
             try {
                 $pdu = $this->pduFactory->createFromBuffer($data);
-                $this->logger->info('pdu {class}', [
-                    'class' => get_class($pdu),
-                ]);
                 $this->connection->emit('pdu', [$pdu]);
                 $this->connection->emit(get_class($pdu), [$pdu]);
             } catch (\Throwable $e) {
@@ -143,7 +140,7 @@ class Connection implements ConnectionInterface
 
     public function replyWith(Pdu $pdu): void
     {
-        $this->logger->debug(bin2hex($pdu->__toString()));
+        // $this->logger->debug(bin2hex($pdu->__toString()));
         $this->connection->write($pdu->__toString());
     }
 
