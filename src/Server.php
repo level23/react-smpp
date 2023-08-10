@@ -66,8 +66,11 @@ class Server implements ServerInterface
                 $connection->replyWith($response);
 
                 Loop::addTimer(0.5, function() use ($connection) {
-                    $this->logger->debug('[smpp][' . $connection->getRemoteAddress() . '] disconnecting');
-                    $connection->close();
+                    // Or should we check isWritable/isReadable?
+                    if ($connection->getRemoteAddress()) {
+                        $this->logger->debug('[smpp][' . $connection->getRemoteAddress() . '] disconnecting');
+                        $connection->close();
+                    }
                 });
             });
 
