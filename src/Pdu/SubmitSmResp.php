@@ -30,7 +30,7 @@ class SubmitSmResp extends Pdu
 
     public function getMessageId(): string
     {
-        return $this->messageId;
+        return $this->messageId ?? '';
     }
 
     public function setMessageId(string $messageId): self
@@ -42,7 +42,9 @@ class SubmitSmResp extends Pdu
     public function __toString(): string
     {
         $wrapper = new DataWrapper('');
-        $wrapper->writeNullTerminatedString($this->getMessageId());
+        if ($this->getMessageId()) {
+            $wrapper->writeNullTerminatedString($this->getMessageId());
+        }
         $this->setBody($wrapper->__toString());
         return parent::__toString();
     }
