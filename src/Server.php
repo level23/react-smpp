@@ -33,7 +33,7 @@ class Server implements ServerInterface
         $this->logger = $logger;
 
         $this->socketServer->on('connection', function (ConnectionInterface $conn) {
-            $this->logger->debug('[smpp][' . $conn->getRemoteAddress() . '] Connected');
+            $this->logger->debug('[smpp][' . $conn->getRemoteAddress() . '] connected');
 
             $connection = new Connection($conn, new Factory(), $this->logger);
 
@@ -49,7 +49,12 @@ class Server implements ServerInterface
             });
 
             $connection->on(SubmitSm::class, function(SubmitSm $pdu) use ($connection) {
-                $this->logger->debug('[smpp][' . $connection->getRemoteAddress() . '] submit_sm');
+                $this->logger->debug(
+                    '[smpp][' . $connection->getRemoteAddress() . '] submit_sm '
+                    . ($pdu->getSourceAddress()?->getValue() ?? 'unknown') . ' => '
+                    . $pdu->getDestinationAddress()->getValue()
+                    . ' (' . strlen($pdu->getShortMessage()) . ' bytes)'
+                );
             });
 
             $connection->on(Unbind::class, function(Unbind $pdu) use ($connection) {
@@ -64,6 +69,10 @@ class Server implements ServerInterface
                     $this->logger->debug('[smpp][' . $connection->getRemoteAddress() . '] disconnecting');
                     $connection->close();
                 });
+            });
+
+            $connection->on('close', function() use ($connection) {
+                $this->logger->debug('[smpp][' . $connection->getRemoteAddress() . '] disconnected');
             });
 
             $this->socketServer->emit(Connection::class, [$connection]);
