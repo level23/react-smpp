@@ -40,7 +40,7 @@ class Factory
         }
 
         $length = $wrapper->readInt32();
-        if (strlen($buffer) !== $length) {
+        if (strlen($buffer) < $length) {
             throw new MalformedPdu(bin2hex($buffer));
         }
 
@@ -54,9 +54,10 @@ class Factory
 
         $className = $this->classMap[$id];
         /** @var Pdu $pdu */
-        $pdu = new $className(substr($buffer, 16));
+        $pdu = new $className(substr($buffer, 16, $length - 16));
         $pdu->setCommandStatus($status);
         $pdu->setSequenceNumber($sequence);
+
         return $pdu;
     }
 }
