@@ -2,9 +2,9 @@
 
 namespace level23\React\Smpp;
 
+use Psr\Log\LoggerInterface;
 use level23\React\Smpp\Pdu\EnquireLink;
 use level23\React\Smpp\Pdu\Factory;
-use Psr\Log\NullLogger;
 use React\EventLoop\LoopInterface;
 use React\Promise\Deferred;
 use React\Socket\ConnectionInterface;
@@ -24,16 +24,22 @@ class Client implements ConnectorInterface
      */
     private $loop;
 
-    public function __construct(ConnectorInterface $connector, LoopInterface $loop)
+    /**
+     * @var LoggerInterface
+     */
+    private $logger;
+
+    public function __construct(ConnectorInterface $connector, LoopInterface $loop, LoggerInterface $logger)
     {
         $this->connector = $connector;
         $this->loop = $loop;
+        $this->logger = $logger;
     }
 
     public function connect($uri)
     {
         return $this->connector->connect($uri)->then(function (ConnectionInterface $conn) {
-            $connection = new Connection($conn, new Factory(), new NullLogger());
+            $connection = new Connection($conn, new Factory(), $this->logger);
 
             $enquireLinkTimer = $this->loop->addPeriodicTimer(
                 self::ENQUIRE_LINK_INTERVAL,
