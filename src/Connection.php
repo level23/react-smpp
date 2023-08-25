@@ -42,6 +42,10 @@ class Connection implements ConnectionInterface
         $this->connection->on('data', function ($data) {
             try {
                 $pdu = $this->pduFactory->createFromBuffer($data);
+
+                $bytesRead = $pdu->getCommandLength();
+                $this->logger->debug('data length: ' . strlen($data) . ', read: ' . $bytesRead);
+
                 $this->connection->emit('pdu', [$pdu]);
                 $this->connection->emit(get_class($pdu), [$pdu]);
             } catch (\Throwable $e) {
