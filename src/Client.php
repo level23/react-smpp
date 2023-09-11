@@ -12,7 +12,7 @@ use React\Socket\ConnectorInterface;
 
 class Client implements ConnectorInterface
 {
-    private const ENQUIRE_LINK_INTERVAL = 30;
+    private const ENQUIRE_LINK_INTERVAL = 28;
 
     /**
      * @var ConnectorInterface
