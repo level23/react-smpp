@@ -36,12 +36,12 @@ class Factory
     {
         $wrapper = new DataWrapper($buffer);
         if ($wrapper->bytesLeft() < 16) {
-            throw new MalformedPdu(bin2hex($buffer));
+            throw new MalformedPdu('Expected at least 16 bytes, but received only ' . $wrapper->bytesLeft() . ' bytes: ' . bin2hex($buffer));
         }
 
         $length = $wrapper->readInt32();
         if (strlen($buffer) < $length) {
-            throw new MalformedPdu(bin2hex($buffer));
+            throw new MalformedPdu('Expected ' . $length . ' bytes, but received only ' . strlen($buffer) . ' bytes: ' . bin2hex($buffer));
         }
 
         $id = $wrapper->readInt32();
