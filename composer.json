@@ -14,7 +14,7 @@
     "require": {
         "php": ">=8.2",
         "ext-iconv": "*",
-        "nesbot/carbon": "^2.68",
+        "nesbot/carbon": "^2.68|^3.0.0",
         "psr/log": "^1.1|^2.0",
         "react/event-loop": "^1.1",
         "react/socket": "^1.2"
